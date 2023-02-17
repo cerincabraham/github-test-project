@@ -7,6 +7,8 @@ let allInputData;
 function AddTask(props) {
     const [inputData, setInputData] = useState('');
 
+
+    // function to handle save click
     const clickHandlerSave = (event) => {
         if (!inputData) {
 

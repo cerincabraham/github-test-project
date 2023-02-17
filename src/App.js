@@ -27,24 +27,44 @@ function App() {
   ]);
 
 
+  // Function to update usesate array with new task created in addtask.js.
+  //Pass the function name to child component using prop and  triger it from thechild.
   const addTodo = (newTodo) => {
     let dummyArray = [...todoArray, newTodo]
     SetTodoArray(dummyArray);
   };
 
 
+  //Function to delete selected task from list using triggering function from child, by passing function using props 
 
+  const delectTodo = (deleteId) => {
+    console.log("delete function callwith id: " + deleteId);
+    const obectIndex = todoArray.findIndex((obj) => (obj.id === deleteId));
+    console.log("Object index " + obectIndex);
+    if (obectIndex > -1) {
+      let dummyArray = [...todoArray];
+      dummyArray.splice(obectIndex, 1);
+      console.log(dummyArray);
+      SetTodoArray(dummyArray);
+    }
+  }
+
+  // create list/copys of components with new data from usestate array 
+  //Map method
   const MyToDoComponentsMap = todoArray.map(function (todo) {
-    return <ToDo key={todo.id} title={todo.title} status={todo.status} />;
+    return <ToDo key={todo.id} title={todo.title} status={todo.status} id={todo.id} delectAction={delectTodo} />;
   });
 
+  // create list/copys of components with new data from usestate array 
+  //Push method
   const MyToDoComponentsPush = [];
   for (const todo of todoArray) {
     MyToDoComponentsPush.push(<ToDo title={todo.title} status={todo.status} />)
   }
 
+
   function formatDate(date) {
-    return new Intl.DateTimeFormat("en-us", { weekday: "long" }).format(date);
+    return new Intl.DateTimeFormat("en-NZ", { weekday: "long" }).format(date);
 
   }
 

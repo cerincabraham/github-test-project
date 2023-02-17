@@ -8,7 +8,8 @@ function ToDo(props) {
         if (!CompltedStatus) {
             setCompltedStatus(!CompltedStatus);
         } else {
-            console.log("Delete");
+            console.log("Delete id:" + props.id);
+            props.delectAction(props.id);
         }
 
     }
@@ -20,8 +21,8 @@ function ToDo(props) {
         <div className={CompltedStatus ? "todo completed" : "todo"}>
             <h3 className="todo-title">{props.title}</h3>
             <div className="statusCtrl">
-                <p> Status : {CompltedStatus ? "✔" : "Incompleted"}</p>
-                <button onClick={clickHandler}>{CompltedStatus ? "Delete" : "Done"}</button>
+                <p>{CompltedStatus ? "✔" : "Incompleted"}</p>
+                <button onClick={clickHandler} className={CompltedStatus ? "btn-Delete" : ""}>{CompltedStatus ? "Delete" : "Done"} </button>
             </div>
         </div>
 
